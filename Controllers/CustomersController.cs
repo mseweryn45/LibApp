@@ -19,14 +19,18 @@ namespace LibApp.Controllers
         }
         public ViewResult Index()
         {
-            var customers = _context.Customers.Include(c => c.MembershipType).ToList();
+            var customers = _context.Customers
+                .Include(c => c.MembershipType)
+                .ToList();
             
             return View(customers);
         }
 
         public IActionResult Details(int id)
         {
-            var customer = _context.Customers.ToList().SingleOrDefault(c => c.Id == id);
+            var customer = _context.Customers
+                .Include(c => c.MembershipType)
+                .SingleOrDefault(c => c.Id == id);
 
             if (customer == null)
             {
