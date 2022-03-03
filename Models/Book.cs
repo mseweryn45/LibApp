@@ -20,10 +20,14 @@ namespace LibApp.Models
 		[Display(Name="Genre")]
 		public byte GenreId { get; set; }
 		public DateTime DateAdded { get; set; }
+		[Required(ErrorMessage = "ReleaseDate is required.")]
 		[Display(Name="Release Date")]
 		public DateTime ReleaseDate { get; set; }
+		[Required]
+		[Range(1,20,ErrorMessage ="NumberInStock must be between 1 and 20.")]
 		[Display(Name = "Number in Stock")]
 		public int NumberInStock { get; set; }
+		[Required]
 		public int NumberAvailable { get; set; }
 	}
       
