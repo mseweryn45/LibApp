@@ -1,7 +1,7 @@
-@model IEnumerable<LibApp.Models.Book>
+@model IEnumerable<LibApp.Dtos.BookDto>
 
 @{ ViewBag.Title = "Books";
-                Layout = "~/Views/Shared/_Layout.cshtml"; }
+    Layout = "~/Views/Shared/_Layout.cshtml"; }
 
 <h2>Books</h2>
 
@@ -24,8 +24,9 @@
 
 @section Scripts
 {
-    <script>$(document).ready(function () {
-        $("#books").DataTable({
+    <script>
+    $(document).ready(function () {
+            $("#books").DataTable({
                 ajax: {
                     url: "api/books",
                     dataSrc: ""
@@ -48,11 +49,12 @@
                     }
                 ]
             });
-    });</script>
+        });</script>
 
-    <script>$(document).ready(function () {
+    <script>
+    $(document).ready(function () {
             var table = $("#books").DataTable();
-        $("#books").on("click", ".js-delete", function () {
+            $("#books").on("click", ".js-delete", function () {
                 var button = $(this);
                 bootbox.confirm({
                     message: "Confirm book deletion?",

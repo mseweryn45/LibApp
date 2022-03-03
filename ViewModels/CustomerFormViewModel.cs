@@ -1,9 +1,8 @@
-﻿using LibApp.Models;
-using System;
+﻿using System;
+using LibApp.Dtos;
+using LibApp.Models;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace LibApp.ViewModels
 {
@@ -20,7 +19,7 @@ namespace LibApp.ViewModels
         [Display(Name = "Date of Birth")]
         [Min18YearsIfMember]
         public DateTime? Birthdate { get; set; }
-        public IEnumerable<MembershipType> MembershipTypes { get; set; }
+        public IEnumerable<MembershipTypeDto> MembershipTypes { get; set; }
 
         public string Title
         {
@@ -35,7 +34,7 @@ namespace LibApp.ViewModels
             Id = 0;
         }
 
-        public CustomerFormViewModel(Customer customer)
+        public CustomerFormViewModel(CustomerDto customer)
         {
             Id = customer.Id;
             Name = customer.Name;

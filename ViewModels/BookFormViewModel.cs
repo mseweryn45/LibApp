@@ -1,5 +1,5 @@
-﻿using LibApp.Models;
-using System;
+﻿using LibApp.Dtos;
+using LibApp.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,8 +8,8 @@ namespace LibApp.ViewModels
 {
     public class BookFormViewModel
     {
-        public Book Book { get; set; }
-        public IEnumerable<Genre> Genres { get; set; }
+        public BookDto Book { get; set; }
+        public IEnumerable<GenreDto> Genres { get; set; }
         public string Title
         {
             get

@@ -6,52 +6,35 @@ using System.Threading.Tasks;
 using LibApp.Models;
 using LibApp.ViewModels;
 using LibApp.Data;
-using Microsoft.EntityFrameworkCore;
+using LibApp.Dtos;
+using AutoMapper;
+using LibApp.Controllers.Base;
 
 namespace LibApp.Controllers
 {
-    public class CustomersController : Controller
+    public class CustomersController : BaseController
     {
-        private readonly ApplicationDbContext _context;
-
-        public CustomersController(ApplicationDbContext context)
-        {
-            _context = context;
+        public CustomersController(ApplicationDbContext contex, IMapper mapper) : base(contex, mapper)
+        {        
         }
+        public ViewResult Index() => View();
+        public async Task<IActionResult> Details(int id) => View(await this.MakeGetRequest<CustomerDto>($"customers/{id}"));
 
-        public ViewResult Index()
-        {          
-            return View();
-        }
 
-        public IActionResult Details(int id)
-        {
-            var customer = _context.Customers
-                .Include(c => c.MembershipType)
-                .SingleOrDefault(c => c.Id == id);
-
-            if (customer == null)
-            {
-                return Content("User not found");
-            }
-
-            return View(customer);
-        }
-
-        public IActionResult New()
+        public async Task<IActionResult> New()
         {
             var membershipTypes = _context.MembershipTypes.ToList();
             var viewModel = new CustomerFormViewModel()
             {
-                MembershipTypes = membershipTypes
+                MembershipTypes = await this.MakeGetRequest<IEnumerable<MembershipTypeDto>>($"customers/membershipTypes")
             };
 
             return View("CustomerForm", viewModel);
         }
 
-        public IActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
-            var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
+            var customer = await this.MakeGetRequest<CustomerDto>($"customers/{id}");
             if (customer == null)
             {
                 return NotFound();
@@ -59,7 +42,7 @@ namespace LibApp.Controllers
 
             var viewModel = new CustomerFormViewModel(customer)
             {
-                MembershipTypes = _context.MembershipTypes.ToList()
+                MembershipTypes = await this.MakeGetRequest<IEnumerable<MembershipTypeDto>>($"customers/membershipTypes")
             };
 
             return View("CustomerForm", viewModel);
@@ -67,33 +50,10 @@ namespace LibApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Save(Customer customer)
+        public async Task<IActionResult> Save(Customer customer)
         {
-            if (!ModelState.IsValid)
-            {
-                var viewModel = new CustomerFormViewModel(customer)
-                {
-                    MembershipTypes = _context.MembershipTypes.ToList()
-                };
-
-                return View("CustomerForm", viewModel);
-            }
-
-            if (customer.Id == 0)
-            {
-                _context.Customers.Add(customer);
-
-            }
-            else
-            {
-                var customerInDb = _context.Customers.Single(c => c.Id == customer.Id);
-                customerInDb.Name = customer.Name;
-                customerInDb.Birthdate = customer.Birthdate;
-                customerInDb.MembershipTypeId = customer.MembershipTypeId;
-                customerInDb.HasNewsletterSubscribed = customer.HasNewsletterSubscribed;
-            }
-
-            _context.SaveChanges();
+            if (customer.Id == 0) await this.MakePostRequest<Customer>($"customers", customer);
+            else await this.MakePutRequest<CustomerDto>($"customers/{customer.Id}", _mapper.Map<CustomerDto>(customer));
 
             return RedirectToAction("Index", "Customers");
         }
