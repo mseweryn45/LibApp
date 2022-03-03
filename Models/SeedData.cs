@@ -137,7 +137,7 @@ namespace LibApp.Models
                 {
                     Name = "Metro 2033",
                     AuthorName = "Dmitrij Głuchowski",
-                    GenreId = 6,
+                    GenreId = 2,
                     DateAdded = new DateTime(),
                     NumberAvailable = 20,
                     NumberInStock = 20,
@@ -147,7 +147,7 @@ namespace LibApp.Models
                  {
                      Name = "Metro 2034",
                      AuthorName = "Dmitrij Głuchowski",
-                     GenreId = 1,
+                     GenreId = 2,
                      DateAdded = new DateTime(),
                      NumberAvailable = 5,
                      NumberInStock = 10,
