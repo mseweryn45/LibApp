@@ -19,7 +19,7 @@ namespace LibApp.Models
                 SeedDBWithBooks(context);
                 SeedDBWithRentals(context);
 
-                
+
                 context.SaveChanges();
             }
         }

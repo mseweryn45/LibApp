@@ -8716,6 +8716,7 @@
       "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation >= 5.0.9",
       "Microsoft.EntityFrameworkCore.SqlServer >= 5.0.9",
       "Microsoft.EntityFrameworkCore.Tools >= 5.0.9",
+      "Microsoft.Extensions.Caching.Memory >= 5.0.0",
       "System.Configuration.ConfigurationManager >= 6.0.0",
       "jquery.datatables >= 1.10.15",
       "toastr >= 2.1.1",
@@ -8801,6 +8802,10 @@
           "Microsoft.EntityFrameworkCore.Tools": {
             "target": "Package",
             "version": "[5.0.9, )"
+          },
+          "Microsoft.Extensions.Caching.Memory": {
+            "target": "Package",
+            "version": "[5.0.0, )"
           },
           "System.Configuration.ConfigurationManager": {
             "target": "Package",
