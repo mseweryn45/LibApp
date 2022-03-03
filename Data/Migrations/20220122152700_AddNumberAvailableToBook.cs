@@ -2,23 +2,23 @@
 
 namespace LibApp.Data.Migrations
 {
-    public partial class AddNameToMembershipType : Migration
+    public partial class AddNumberAvailableToBook : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<string>(
-                name: "Name",
-                table: "MembershipTypes",
-                type: "nvarchar(max)",
+            migrationBuilder.AddColumn<int>(
+                name: "NumberAvailable",
+                table: "Books",
+                type: "int",
                 nullable: false,
-                defaultValue: "");
+                defaultValue: 0);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Name",
-                table: "MembershipTypes");
+                name: "NumberAvailable",
+                table: "Books");
         }
     }
 }

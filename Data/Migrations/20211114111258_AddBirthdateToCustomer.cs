@@ -3,12 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace LibApp.Data.Migrations
 {
-    public partial class AddBirthdateToCustomers : Migration
+    public partial class AddBirthdateToCustomer : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<DateTime>(
-                name: "BirthDate",
+                name: "Birthdate",
                 table: "Customers",
                 type: "datetime2",
                 nullable: true);
@@ -17,7 +17,7 @@ namespace LibApp.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "BirthDate",
+                name: "Birthdate",
                 table: "Customers");
         }
     }

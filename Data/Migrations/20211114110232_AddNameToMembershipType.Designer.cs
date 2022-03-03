@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LibApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211113105908_SetNameOfMembershipTypes")]
-    partial class SetNameOfMembershipTypes
+    [Migration("20211114110232_AddNameToMembershipType")]
+    partial class AddNameToMembershipType
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -59,7 +59,8 @@ namespace LibApp.Data.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<short>("SignUpFee")
                         .HasColumnType("smallint");
