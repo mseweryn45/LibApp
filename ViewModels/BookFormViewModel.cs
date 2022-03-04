@@ -8,7 +8,7 @@ namespace LibApp.ViewModels
 {
     public class BookFormViewModel
     {
-        public BookDto Book { get; set; }
+        public Book Book { get; set; }
         public IEnumerable<GenreDto> Genres { get; set; }
         public string Title
         {

@@ -45,7 +45,8 @@ namespace LibApp.Controllers.Api
         public async Task<IActionResult> GetCustomer(int id)
         {
             Console.WriteLine("START REQUEST");
-            var customer = await _context.Customers.Include(c => c.MembershipType).SingleOrDefaultAsync(c => c.Id == id);
+            var customer = await _context.Customers.SingleOrDefaultAsync(c => c.Id == id);
+            await Task.Delay(2000);
             if (customer == null)
             {
                 return NotFound();
@@ -70,15 +71,6 @@ namespace LibApp.Controllers.Api
             customerDto.Id = customer.Id;
 
             return customerDto;
-        }
-
-        // GET /api/customers/membershipTypes
-        [HttpGet]
-        [Route("membershipTypes")]
-        public IActionResult GetMembershipTypes()
-        {
-
-            return Ok(_context.MembershipTypes.ToList().Select(_mapper.Map<MembershipType, MembershipTypeDto>));
         }
 
         // PUT /api/customers/{id}

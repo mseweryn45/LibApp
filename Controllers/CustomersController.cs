@@ -23,7 +23,6 @@ namespace LibApp.Controllers
 
         public async Task<IActionResult> New()
         {
-            var membershipTypes = _context.MembershipTypes.ToList();
             var viewModel = new CustomerFormViewModel()
             {
                 MembershipTypes = await this.MakeGetRequest<IEnumerable<MembershipTypeDto>>($"customers/membershipTypes")
